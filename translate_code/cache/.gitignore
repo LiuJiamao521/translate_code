@@ -1,0 +1,3 @@
+# Ignore cached translations; keep this directory for editable installs.
+*
+!.gitignore
