@@ -18,8 +18,8 @@ Notebook **outputs** are not modified. Unknown suffixes print an error and list 
 **From a clone (editable, for development)**
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USER/YOUR_REPO.git
-cd YOUR_REPO
+git clone https://github.com/LiuJiamao521/translate_code.git
+cd translate_code
 python3 -m pip install -e .
 ```
 
@@ -38,7 +38,6 @@ translate-code --help
 python3 -m translate_code --help
 ```
 
-> **Before publishing:** replace `YOUR_GITHUB_USER` / `YOUR_REPO` in [`pyproject.toml`](pyproject.toml) under `[project.urls]` with your real GitHub paths (or remove that section if you prefer).
 
 ---
 
@@ -100,19 +99,6 @@ Without `-o`, the input file is overwritten. With `--backup`, a `.bak` copy is w
 | `AI_BASE_URL` | No | API root |
 | `AI_MODEL` | No | Model id |
 
-### Local env file (not for GitHub)
-
-You can store the above in a file instead of exporting them in every shell session.
-
-| File | Purpose |
-|------|---------|
-| `~/.translate-code.env` | User-wide defaults; only fills variables **not** already set in the shell |
-| `.translate-code.env` | Project file: searched upward from **current working directory**, then from **the input file’s directory**; each file **overwrites** `AI_*` keys for that run |
-
-Format is simple `KEY=value` lines (`export KEY=value` is OK). See [`.translate-code.env.example`](.translate-code.env.example).
-
-- Add **`.translate-code.env`** to `.gitignore` (already listed in this repo) — **do not commit** real secrets.
-- To disable loading these files: `--no-local-env` or `export TRANSLATE_CODE_SKIP_LOCAL_ENV=1`.
 
 ---
 
@@ -128,7 +114,7 @@ translate_code/          # Python package
   ipynb_io.py            # Notebook read/write
   file_types.py          # Suffix → parser
   cache/                 # Default cache dir (gitignored JSON)
-test.py, test.R, test.ipynb   # Optional local smoke tests (Chinese comments)
+test.py, test.R, test.ipynb, .translate-code.env   # Optional local smoke tests (Chinese comments)
 ```
 
 ---
@@ -137,9 +123,3 @@ test.py, test.R, test.ipynb   # Optional local smoke tests (Chinese comments)
 
 - **Cache:** identical Chinese snippets are reused from disk unless `--no-cache`. Default cache lives under the installed `translate_code` package (see `.gitignore`).
 - **Edge cases:** complex shell/R quoting or f-strings may be skipped; use `--dry-run` / `--mock` and review diffs on critical files.
-
----
-
-## License
-
-[MIT](LICENSE)
